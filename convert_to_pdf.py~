@@ -13,4 +13,4 @@ def convert_to_pdf(filename=""):
 	
 	os.system("cp \""+source+"\" \""+destination+"\"")
 
-convert_to_pdf(filename)
+convert_to_pdf('E-receiptTemplate2015')
