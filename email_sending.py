@@ -8,7 +8,7 @@ def send_email(sender_email="",sender_pass="",receiver_email="",subject="",text_
 	# Import the email modules we'll need
 	import email
 	import email.mime.application
-	print "Sending email..."
+	print "Sending email..."+sender_email
 	# Create a text/plain message
 	msg = email.mime.Multipart.MIMEMultipart()
 	msg['Subject'] = subject
