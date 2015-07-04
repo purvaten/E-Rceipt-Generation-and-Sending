@@ -10,6 +10,7 @@ import convert_to_pdf
 import project3
 import reg_no
 import get_date
+import email_sending
 
 f = open('coep_mun.txt', 'r')
 text = f.read()
@@ -18,7 +19,7 @@ email_id = split[0]
 print email_id
 password = split[1]
 print password
-path = split[2]
+path = os.getcwd()+'/'
 data_obtained =  project3.scrape_email(email_id, password)
 print data_obtained
 for list_element in data_obtained:
@@ -31,5 +32,10 @@ for list_element in data_obtained:
 		continue
 	no = reg_no.insert_element(name)
 	filename = form_filling.form_filling(date, name, price, no )
-	print filename
 	convert_to_pdf.convert_to_pdf(filename, path)
+	email_subject = 'E-receipt for Fee Payment'
+	email_body = open('email_body.txt','r').read()
+	receiver_email = list_element[2]
+	email_sending.send_email(email_id,password,receiver_email,email_subject,email_body,filename)
+	os.system('rm -rf '+filename+'.docx')
+	os.system('rm -rf '+filename+'.pdf')
