@@ -2,11 +2,10 @@ def search(name):
 	searchfile = open("reg_ppl.txt", "r")
 	for line in searchfile:
 		if name in line:
-			print "Already There"
-			exit(0)
-
-	no = insert_element(name)
-	return no
+			return 0
+	searchfile.close()
+	#no = insert_element(name)
+	return 1
 
 
 def insert_element(name):
@@ -16,11 +15,6 @@ def insert_element(name):
 	
 	no = 1512001 + len(splits)
 	f.write("\n"+str(no)+" "+name)
-	return no
 	f.close()
-
-
-
-
-
-
+	return no
+	

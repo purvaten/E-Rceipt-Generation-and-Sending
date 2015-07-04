@@ -14,16 +14,3 @@ def form_filling(date, name, amt,reg_no):
 
 	doc.save((str(reg_no) +" " +name+".docx").replace(" ", "_"))
 	return (str(reg_no) +" " +name).replace(" ", "_")
-
-
-
-
-
-
-
-
-
-
-
-
-	

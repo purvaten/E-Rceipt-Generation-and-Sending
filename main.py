@@ -9,6 +9,7 @@ import os
 import convert_to_pdf
 import project3
 import reg_no
+import get_date
 
 f = open('coep_mun.txt', 'r')
 text = f.read()
@@ -19,46 +20,16 @@ password = split[1]
 print password
 path = split[2]
 data_obtained =  project3.scrape_email(email_id, password)
-
-
+print data_obtained
 for list_element in data_obtained:
-	date = list_element[0]
-
-	date_data = date.split()
-
-	current_date_format = re.compile(r'\d+:\d+')
-	other_date_format = re.compile(r'\w+ \d+')
-	if current_date_format.search(date)!= None:
-		date_value = (time.strftime("%d/%m/%Y"))
-	elif other_date_format.search(date)!= None:
-		date_value = date_data[1]
-		
-	month = date_data[0]
-	if month == "Jun":
-		month_value = "06"
-	elif month =="Jul":
-		month_value = "07"
-	elif month == "Aug":
-		month_value = "08"
-	elif month =="Sep":
-		month_value = "09"
-	elif month == "Oct":
-		month_value = "10"
-	elif month == "Nov":
-		month_value = "11"
-
-	date = date_value+"/"+month_value+"/2015"
-
+	date = get_date.get_date(list_element[0])
 	name = list_element[1]
 	price = "1300"
-	no = reg_no.search(name)
-
-	form_filling.form_filling(date, name, price, no )
+	hasBeenSent = reg_no.search(name)
+	if hasBeenSent==0:
+		print name+" has already been sent a receipt"
+		continue
+	no = reg_no.insert_element(name)
 	filename = form_filling.form_filling(date, name, price, no )
 	print filename
-
 	convert_to_pdf.convert_to_pdf(filename, path)
-
-
-
-
