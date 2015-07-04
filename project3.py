@@ -42,7 +42,9 @@ def scrape_email(email_id,password):
 	for row in rows:
 		test = row.text
 		#print "email is \n" + test
+
 		date=test.splitlines()[-1]
+
 		requiredRegex = re.compile(r'sold for COEPMUN 2015')
 		if requiredRegex.search(test)!=None:
 			subList=[]
@@ -75,22 +77,4 @@ def scrape_email(email_id,password):
 	driver.close()
 	return results
 
-
-f = open('coep_mun.txt', 'r')
-text = f.read()
-split = text.splitlines()
-email_id = split[0]
-print email_id
-password = split[1]
-print password
-data_obtained =  scrape_email(email_id, password)
-
-
-for list_element in data_obtained:
-	date = list_element[0]
-	name = list_element[1]
-	price = "1300"
-	no = "1512000"
-	form_filling.form_filling(date, name, price, no )
-	convert_to_pdf.convert_to_pdf(filename)
 
