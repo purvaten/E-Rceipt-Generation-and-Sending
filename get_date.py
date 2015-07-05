@@ -11,18 +11,11 @@ def get_date(date=""):
 		date_value = date_data[1]
 	month_value=""
 	month = date_data[0]
-	if month == "Jun":
-		month_value = "06"
-	elif month =="Jul":
-		month_value = "07"
-	elif month == "Aug":
-		month_value = "08"
-	elif month =="Sep":
-		month_value = "09"
-	elif month == "Oct":
-		month_value = "10"
-	elif month == "Nov":
-		month_value = "11"
-
+	month_names = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+	month_number = month_names.index(month)+1
+	if month_number<10:
+		month_value='0'+str(month_number)
+	else:
+		month_value=str(month_number)
 	date = date_value+"/"+month_value+"/2015"
 	return date

@@ -71,7 +71,13 @@ def scrape_email(email_id,password):
 					subList.append(emailResults.group(1))
 
 			results.append(subList)
-
+			driver.find_elements_by_class_name('ns')[1].click()
+			options = driver.find_elements_by_class_name('J-N-Jz')
+			for option in options:
+				if option.text == 'Sent E-Receipts':
+					option.click()
+					break
+			driver.back()
 			driver.back()
 
 	driver.close()
